@@ -1,0 +1,23 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:tag1": "playwright test --grep @tag1",
+    "test:tag2": "playwright test --grep @tag2",
+    "test:pom": "playwright test --grep @pom --headed --project chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.0",
+    "xlsx": "^0.18.5"
+  }
+}
