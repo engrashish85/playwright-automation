@@ -23,6 +23,8 @@ test.describe('Page Object Model Tests', () => {
         const productType = testData.productLoginData.productType;
         await page.goto('https://www.demoblaze.com/');
         await loginPage.login(testData.productLoginData.username, testData.productLoginData.password);
+        await loginPage.clickGenericLink("Cart");
+        await cartPage.deleteItemsFromCart();
         await productsPage.addProductToCart(productType, productName);
         await loginPage.clickGenericLink("Cart");
         const validateProduct = await cartPage.validateProductInCart(productName);
