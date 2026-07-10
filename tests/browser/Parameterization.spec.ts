@@ -1,7 +1,8 @@
-import {test, expect, Page} from '@playwright/test';
+import {test, expect, Page, TestInfo} from '@playwright/test';
 import fs from 'fs';
 import {parse} from 'csv-parse/sync';
 import xlsx from 'xlsx';
+
 
 //Using array of search terms to parameterize the test
 const searchTerms = ['laptop', 'phone', 'book'];
@@ -45,7 +46,7 @@ test.describe('Parameterization', () => {
         test(`should work with parameters: ${searchTerm}`, async ({page}) => {
             await page.goto('https://demowebshop.tricentis.com/');
             const title = await page.title();
-            expect(title).toBe('Demo Web Shop');
+            expect(title).toBe('Demo W.eb Shop');
             await page.locator('#small-searchterms').fill(searchTerm);
             await page.locator('input[type="submit"]').click();
             await page.waitForSelector('//div[@class="product-grid"]/descendant::img');
@@ -228,5 +229,42 @@ test.describe('Parameterization', () => {
         }
     });
 });
+
+test.describe.configure( { mode:'parallel'});
+test.describe('Login with parallel tests using data parameterization', () => {
+    const loginData:any = JSON.parse(fs.readFileSync('test-data/data_workers.json', 'utf-8'));
+    const data = Object.entries(loginData.loginData);
+    for (const [workerName, credentials] of data) {
+        test(`should work with json file parameters with parallel workers - ${workerName}`, async ({page}, testInfo) => {
+        // for (let i:number = 0; i < data.length; i++) {
+            const credentials:any = data[testInfo.workerIndex];
+            console.log(`[Worker ${testInfo.workerIndex} with data ${credentials[1].email}`)
+            await page.goto('https://www.amazon.in/ap/signin');
+            await page.locator("//a[text()='Home']").click();
+            await page.locator("//span[text()='Hello, sign in']").click();
+            await page.locator('#ap_email_login').fill(credentials[1].email);
+            await page.locator("input[class='a-button-input']").click();
+            if (credentials.valid) {
+                await page.locator('input[type="submit"]').click();
+                await page.locator('#ap_password').fill(credentials.password);
+                await page.locator("input[class='a-button-input']").click();
+                await page.waitForSelector("//span[contains(text(),'Deliver to')]");
+                await page.locator("//span[contains(text(),'Deliver to')]").isVisible();
+                await page.locator("//span[contains(text(),'Hello,')]").isVisible();
+                await page.locator("button[aria-label='Expand Account and Lists']").click();
+                await page.locator("//span[text()='Your Account']").isVisible();
+                await page.locator("//span[text()='Sign Out']").click();
+            } else {
+                await page.getByText("It looks like you are new to Amazon").isVisible();
+                const buttonText = await page.locator("//input[@type='submit']/following-sibling::span").textContent();
+                expect(buttonText).toContain('Proceed to create an account');
+            }
+        // }
+        });
+    }
+    
+});
+
+
 
     

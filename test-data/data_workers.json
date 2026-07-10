@@ -1,0 +1,30 @@
+{
+  "loginData": {
+    "worker1": {
+      "email": "ashexample272282@yahoo.co.in",
+      "password": "ash123",
+      "valid": false
+    },
+    "worker2": {
+      "email": "anotheruser@example.com",
+      "password": "AnotherPassword123",
+      "valid": false
+    },
+    "worker3": {
+      "email": "thirduser@example.com",
+      "password": "ThirdPassword123",
+      "valid": false
+    },
+    "worker4": {
+      "email": "fourthuser@example.com",
+      "password": "FourthPassword123",
+      "valid": false
+    }
+  },
+  "productLoginData": {
+    "username": "b@abc.com",
+    "password": "abc123",
+    "productType": "Phones",
+    "productName": "Samsung galaxy s6"
+  }
+}

@@ -21,6 +21,10 @@ jobs:
       run: npm run test:tag1
     - name: Run Playwright @tag2 tests
       run: npm run test:tag2
+    - name: Run Playwright @pom tests
+      run: npm run test:pom
+    - name: Run Playwright Product tests
+      run: npm run test:productPage
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
