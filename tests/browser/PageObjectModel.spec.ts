@@ -25,6 +25,7 @@ test.describe('Page Object Model Tests', () => {
         await loginPage.login(testData.productLoginData.username, testData.productLoginData.password);
         await loginPage.clickGenericLink("Cart");
         await cartPage.deleteItemsFromCart();
+        await loginPage.clickGenericLink("Home");
         await productsPage.addProductToCart(productType, productName);
         await loginPage.clickGenericLink("Cart");
         const validateProduct = await cartPage.validateProductInCart(productName);
