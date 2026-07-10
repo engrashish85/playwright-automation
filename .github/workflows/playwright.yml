@@ -24,7 +24,7 @@ jobs:
     - name: Run Playwright @pom tests
       run: npm run test:pom
     - name: Run Playwright Product tests
-      run: npm run test:productTest
+      run: npm run test:productPage
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
