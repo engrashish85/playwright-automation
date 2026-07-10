@@ -26,6 +26,13 @@ test.describe('Grouping tests', {tag: '@tag1'}, () => {
         console.log("Executing test4");
     });
 
+    test('test', async({}, testInfo) => {
+       testInfo.annotations.push({ type: 'slow', description: 'slow test'},
+        { type: 'priority', description: 'priority test'}
+       ) 
+
+    });
+
     test.afterEach(async () => {
         console.log("After each test");
     });

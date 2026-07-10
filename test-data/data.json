@@ -1,21 +1,21 @@
 {
 	"loginData":[
-		{ 
+		{
 			"email": "ash@yahoo.co.in", 
 			"password": "ash123", 
-			"valid": true 
+			"valid": true
 		},
-		{ 
+		{
 			"email": "anotheruser@example.com", 
 			"password": "AnotherPassword123", 
-			"valid": false 
+			"valid": false
 		},
-    	{ 
+		{ 
 			"email": "thirduser@example.com", 
 			"password": "ThirdPassword123", 
 			"valid": false 
 		},
-    	{ 
+		{ 
 			"email": "fourthuser@example.com", 
 			"password": "FourthPassword123", 
 			"valid": false 
@@ -26,5 +26,10 @@
 		"password": "abc123",
 		"productType": "Phones",
 		"productName": "Samsung galaxy s6"
-	}
+	},
+	"demoBlazeLoginData": {
+		"username":"a@org.au",
+		"password":"abc@12345!!"
+	},
+	"productTypes":"Sauce Labs Backpack,Sauce Labs Bolt T-Shirt"
 }

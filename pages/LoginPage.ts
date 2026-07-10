@@ -17,12 +17,13 @@ export class LoginPage {
         this.loginButton = page.locator('button', { hasText: 'Log in' });
     }
 
-    async login(username: string, password: string) : Promise<ProductsPage> {
+    // async login(username: string, password: string) : Promise<ProductsPage> {
+    async login(username: string, password: string) {
         await this.loginLink.click();
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
-        return new ProductsPage(this.page);
+        // return new ProductsPage(this.page);
     }
 
     async clickGenericLink(linkText: string) {
