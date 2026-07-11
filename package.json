@@ -6,8 +6,8 @@
   "scripts": {
     "test:tag1": "playwright test --grep @tag1",
     "test:tag2": "playwright test --grep @tag2",
-    "test:pom": "playwright test --grep @pom --headed --project chromium",
-    "test:productPage": "playwright test --grep @productTest --headed --project webkit"
+    "test:pom": "playwright test --grep @pom --project chromium",
+    "test:productPage": "playwright test --grep @productTest --project webkit"
   },
   "keywords": [],
   "author": "",

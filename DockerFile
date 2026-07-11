@@ -1,0 +1,23 @@
+# Official Playwright image (includes Node.js, Playwright and all browser dependencies)
+FROM mcr.microsoft.com/playwright:v1.55.0-jammy
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files first (improves Docker layer caching)
+COPY package*.json ./
+
+# Install project dependencies
+RUN npm ci
+
+# Copy the remaining project files
+COPY . .
+
+# Install Playwright browsers (safe even though the base image already contains them)
+RUN npx playwright install --with-deps
+
+# Create folders for reports and traces
+RUN mkdir -p playwright-report test-results
+
+# Default command
+CMD ["bash"]
