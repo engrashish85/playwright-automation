@@ -13,8 +13,8 @@ RUN npm ci
 # Copy the remaining project files
 COPY . .
 
-# Install Playwright browsers (safe even though the base image already contains them)
-RUN npx playwright install --with-deps
+# Install Playwright browsers (safe even though the base image already contains them )
+#RUN npx playwright install --with-deps
 
 # Create folders for reports and traces
 RUN mkdir -p playwright-report test-results
