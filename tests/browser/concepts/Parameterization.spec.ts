@@ -46,7 +46,7 @@ test.describe('Parameterization', () => {
         test(`should work with parameters: ${searchTerm}`, async ({page}) => {
             await page.goto('https://demowebshop.tricentis.com/');
             const title = await page.title();
-            expect(title).toBe('Demo W.eb Shop');
+            expect(title).toBe('Demo Web Shop');
             await page.locator('#small-searchterms').fill(searchTerm);
             await page.locator('input[type="submit"]').click();
             await page.waitForSelector('//div[@class="product-grid"]/descendant::img');

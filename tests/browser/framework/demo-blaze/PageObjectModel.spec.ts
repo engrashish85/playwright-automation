@@ -1,11 +1,11 @@
 /// <reference types="node" />
 import {Page} from '@playwright/test';
-import  { test, expect } from '../../fixtures/base.fixture';
+import  { test, expect } from '@fixtures/demo-blaze/demo-blaze.fixture';
 import * as fs from 'fs';
 
-import {LoginPage} from '../../pages/LoginPage';
-import {ProductsPage} from '../pages/ProductsPage';
-import {CartPage} from '../../pages/CartPage';
+import {LoginPage} from '@pages/demo-blaze/LoginPage';
+import {ProductsPage} from '@pages/demo-blaze/ProductsStorePage';
+import {CartPage} from '@pages/demo-blaze/CartPage';
 
 test.describe('Page Object Model Tests', () => {
 

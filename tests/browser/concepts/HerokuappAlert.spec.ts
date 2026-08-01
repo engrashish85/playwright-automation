@@ -12,7 +12,6 @@ test('Javascript Alerts', async () => {
     await page.locator("button[onclick='jsAlert()']").click();
     let alertText = await page.locator("#result").textContent();
     console.log("Alert Text: ", alertText);
-
 });
 
 test('Javascript Confirm', async () => {
