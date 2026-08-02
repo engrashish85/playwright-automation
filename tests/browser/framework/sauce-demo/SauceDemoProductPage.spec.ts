@@ -1,8 +1,9 @@
-import { Page, Locator, expect, test } from '@playwright/test'
+import { Page, Locator, expect, test, TestInfo } from '@playwright/test'
 import * as fs from 'fs'
 
 test.describe('Sauce Demo Product Page', { tag: '@productTest' }, () => {
-    test('Sauce demo', async ({ page }) => {
+    test('Sauce demo', async ({ page }, testInfo) => {
+        console.log(`Executing test with ${testInfo.tags}`)
         const file = fs.readFileSync('test-data/data.json', 'utf-8');
         const productTypes = JSON.parse(file).productTypes;
         await page.goto("https://www.saucedemo.com/");
