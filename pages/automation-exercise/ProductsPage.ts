@@ -3,7 +3,6 @@ import {Page, Locator, expect} from '@playwright/test'
 
 export class ProductsPage extends BasePage {
     private readonly shopMenu = this.page.locator("div.shop-menu");
-    private readonly productsLink = this.shopMenu.getByRole("link", { name: /.*Products/ });
     private readonly products = this.page.locator("div.features_items").locator("div.product-image-wrapper");
     private readonly viewProductLink = this.products.getByRole("link", { name: 'View Product'});
     private readonly productsImage = this.products.getByRole("img");
