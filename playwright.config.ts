@@ -20,6 +20,8 @@ export default defineConfig({
   expect: {
     timeout: 30000
   },
+  maxFailures:0,
+  snapshotPathTemplate: 'visual-screenshot/{testFilePath}/{arg}{ext}',
 
   // grep: /@tag1/,
   // grepInvert: /@tag2/,
@@ -28,7 +30,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on   CI only */
-  retries:1,
+  retries:0,
   //retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
@@ -41,12 +43,15 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: true,
+    headless: false,
     trace: 'off',
     testIdAttribute: 'data-test',
     screenshot: 'only-on-failure',
     video: 'off',
-    baseURL: process.env.baseUrl
+    baseURL: process.env.baseUrl,
+    launchOptions:{
+      args: ['--start-maximized']
+    }
   },
 
   /* Configure projects for major browsers */
@@ -57,7 +62,9 @@ export default defineConfig({
     // },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome']
+      use: { ...devices['Desktop Chrome'],
+        viewport: null,
+        deviceScaleFactor: undefined
         // storageState: 'test-data/auth.json'
        },
       //  dependencies: ['setup']
@@ -68,10 +75,10 @@ export default defineConfig({
     //   use: { ...devices['Desktop Firefox'] },
     // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

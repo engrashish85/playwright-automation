@@ -10,6 +10,6 @@ test.describe('Storage Session', () => {
         await page.locator("input.email").fill(loginData.demoBlazeLoginData.username);
         await page.locator("input.password").fill(loginData.demoBlazeLoginData.password);
         await page.locator("input[type='submit'][value='Log in']").click();
-        await page.context().storageState({path:'test-data/auth.json'});
+        await page.context().storageState({path:'test-data/storage-state/auth.json'});
     })
 })

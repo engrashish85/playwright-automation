@@ -1,5 +1,6 @@
 import {Page, Locator} from '@playwright/test';
 import { ProductsPage } from './ProductsStorePage';
+import { BasePage } from '../BasePage';
 
 export class LoginPage {
   

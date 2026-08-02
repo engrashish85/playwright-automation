@@ -20,7 +20,7 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Search' }).click();
   await page.goto('https://www.google.com/search?q=mobiles&sca_esv=b240d25f7bebc0be&source=hp&ei=1XUtavTlMIeO2roP6pr6mAg&iflsig=AFdpzrgAAAAAai2D5YBxe1j4osRnO75CybM_seCd20tl&ved=0ahUKEwi0pJbawoSVAxUHh1YBHWqNHoMQ4dUDCCI&uact=5&oq=mobiles&gs_lp=Egdnd3Mtd2l6Igdtb2JpbGVzMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDILEC4YgAQYxwEY0QMyBRAAGIAEMgUQABiABEjrOFAAWKQccAN4AJABAJgBjQOgAacQqgEHMC4zLjMuM7gBA8gBAPgBAZgCDKACjhLCAggQABiABBixA8ICCxAAGIAEGLEDGIMBwgIOEC4YgAQYigUYsQMYgwHCAgsQLhiABBixAxiDAcICDhAuGIAEGLEDGMcBGNEDwgIaEC4YgAQYigUYjQYYsQMYgwEYxwEYrwEYjgXCAggQLhiABBixA8ICCxAuGIAEGMcBGK8BwgIHEAAYgAQYCsICBRAuGIAEwgIMEAAYgAQYChgLGLEDwgIIEAAYgAQYyQPCAgsQABiABBiKBRiSA5gDAJIHCTMuMy4zLjIuMaAHzkmyBwkwLjMuMy4yLjG4B9gRwgcHMi0zLjUuNMgHwAGACAE&sclient=gws-wiz&sei=4XUtarnwDNjd2roPgdCdgQg');
   await page.getByRole('link', { name: 'Unlocked filter. Not selected.' }).click();
-  await page.getByRole('link', {name:'Images'}).click();
+  await page.getByRole('link', {name:'Images'}).first().click();
   const images = await page.getByRole('img').all();
   console.log(images.length);
   for (const image of images) {
