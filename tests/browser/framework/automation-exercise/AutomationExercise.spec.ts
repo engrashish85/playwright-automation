@@ -78,7 +78,7 @@ async function addProductToCart(page: Page, category:String, subCategory: String
         throw new Error('No product items found');
     }
     const confirmationDialog:Locator = page.locator("div.modal-content");
-    const elements:Locator[] = [
+    const elements:Locator[] = [ 
         confirmationDialog,
         confirmationDialog.locator('div.modal-header').locator('div.icon-box'),
         confirmationDialog.locator('div.modal-header').getByRole('heading', {name:'Added\!'}),

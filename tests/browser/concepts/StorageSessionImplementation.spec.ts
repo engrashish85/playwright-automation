@@ -8,6 +8,6 @@ test.describe("Storage session Implementation", () => {
     test("Storage session from setup", async ({page})=> {
         await page.goto("https://demowebshop.tricentis.com");
         console.log("logged in");
-        expect (page.locator("a.ico-logout")).toBeVisible();
+        await expect (page.locator("a.ico-logout")).toBeVisible();
     })
 })

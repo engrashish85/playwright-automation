@@ -24,14 +24,14 @@ test.describe('Download and Upload file operations', ()=> {
         // console.log(path);
     })
 
-    test.only('Upload Operation', async ()  => {
+    test('Upload Operation', async ()  => {
         await page.waitForLoadState('domcontentloaded');
         const [upload] = await Promise.all([
             page.waitForEvent('filechooser'),
             page.click("input#file-upload")
         ])
         // await page.setInputFiles("input#file-upload", "traces/sample.txt");
-        const isMultiple  = await upload.isMultiple();
+        const isMultiple  = upload.isMultiple();
         console.log(isMultiple);
         await upload.setFiles("traces/sample.txt");
         console.log("set test");
