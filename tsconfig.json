@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "resolveJsonModule":true,
         "ignoreDeprecations": "6.0",
+        "module": "commonjs",
+        "moduleResolution": "node",
         "paths": {
             "@pages/*":["pages/*"],
             "@fixtures/*":["fixtures/*"],
