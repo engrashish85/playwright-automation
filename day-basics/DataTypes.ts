@@ -32,7 +32,7 @@ console.log("Null Value type: ", typeof (nullValue));
 console.log("Undefined Value type: ", typeof (undefinedValue));
 
 //Assignment of price number giving compile time error and type as undefined
-let price:number;
+let price:number = 0;
 console.log("Price: ", price);
 
 //Any data type

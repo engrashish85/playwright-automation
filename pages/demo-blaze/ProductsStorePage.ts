@@ -41,7 +41,7 @@ export class ProductsPage {
                 await this.navigateToMonitors();
                 break;
         }
-        const productLink = this.page.locator('.card-title a', { hasText: productName });
+        const productLink = this.page.locator('.card-title', { hasText: productName });
         await productLink.click();
         const productTitle = await this.productName.textContent();
         expect(productTitle).toBe(productName);

@@ -29,7 +29,7 @@ test('create book and validate booking id', async({request}) => {
 })
 
 test('Create body with random data and validate booking', async({request}, testInfo) => {
-    let body, response, responseText: string, responseBody;
+    let body:any, response, responseText: string, responseBody;
 
     const checkin = DateTime.now().toFormat("yyyy-MM-dd");
     const checkout = DateTime.now().plus({day:5}).toFormat("yyyy-MM-dd");

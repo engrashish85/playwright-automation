@@ -9,6 +9,7 @@ test('validate view product', async({page}) => {
     await page.goto("https://automationexercise.com/");
     const productsPage = new ProductsPage(page);
     await productsPage.clickNavigationLink("Products");
-    const productDetails: Map<string, string> = await productsPage.viewProduct(0);
+    const productDetails: Map<string, string> = await productsPage.retrieveProductDetails(0);
+    await productsPage.viewProduct(0);
     await productsPage.validateProductDetails(productDetails);
 })

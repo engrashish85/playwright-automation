@@ -7,7 +7,12 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -17,17 +22,53 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
-    - name: Run Playwright @tag1 tests
-      run: npm run test:tag1
-    - name: Run Playwright @tag2 tests
-      run: npm run test:tag2
-    - name: Run Playwright @pom tests
-      run: npm run test:pom
-    - name: Run Playwright Product tests
-      run: npm run test:productPage
-    - uses: actions/upload-artifact@v4
+    # - name: Run Playwright @tag1 tests
+    #   run: npm run test:tag1
+    # - name: Run Playwright @tag2 tests
+    #   run: npm run test:tag2
+    # - name: Run Playwright @pom tests
+    #   run: npm run test:pom
+    # - name: Run Playwright Product tests
+    #   run: npm run test:productPage
+    - name: Run all tests instead of running individual ones
+      run: npx playwright test --grep "@tag1|@tag2|@pom|@productTest" --project chromium --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+    # - name: Upload html report
+    #   uses: actions/upload-artifact@v4
+    #   if: ${{ !cancelled() }}
+    #   with:
+    #     name: playwright-report
+    #     path: playwright-report/
+    #     retention-days: 1
+    - name: Upload blob report
       if: ${{ !cancelled() }}
+      uses: actions/upload-artifact@v4
       with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+        name: blob-report-${{ matrix.shardIndex }}
+        path: blob-report
+        retention-days: 1
+
+  merge-reports:
+    if: ${{ !cancelled() }}
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: npm ci
+      - name: Download all reports from all shards
+        uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+      - name: Merge into HTML report
+        run: npx playwright merge-reports --reporter=html ./all-blob-reports
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 2
+  

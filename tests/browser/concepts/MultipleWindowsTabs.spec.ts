@@ -1,4 +1,5 @@
 import {Page, expect, Browser, test, Locator} from '@playwright/test';
+import { L } from 'node_modules/@faker-js/faker/dist/index-BSUsvzGS';
 
 test.describe('Multiple Windows or tabs', () => {
     test('Handle multiple tabs', async( {browser }) => {
@@ -35,4 +36,47 @@ test.describe('Multiple Windows or tabs', () => {
         await newWindow.close();
         await page.close();
     })
-})
+
+    test("Multiple Windows", async({browser}) => {
+        const context = await browser.newContext();
+        const page = await context.newPage();
+        await page.goto("https://demo.automationtesting.in/Windows.html");
+        const [newWindow] = await Promise.all([
+            context.waitForEvent("page"),
+            page.locator("div#Tabbed").getByRole("button", { name: /.*click.*/i }).click()
+        ]);
+        await expect(newWindow.getByRole("heading", {
+            name: /Thank you for joining the Selenium and Appium 2026 Conference/
+        })).toBeVisible();
+        const [newWindow1] = await Promise.all([
+            newWindow.waitForEvent("popup"),
+            await newWindow.getByRole("link", {name: "Visit Conference Website for"}).click()
+            // await newWindow.waitForLoadState('load')
+        ]);
+        // console.log(newWindow.url());
+        await newWindow1.getByRole("link", {name: /Videos.*Photos.*/}).click();
+
+        await context.close();
+        await browser.close();
+    });
+
+    test("Multiple Windows1", async ({ browser }) => {
+        const context = await browser.newContext();
+        const page = await context.newPage();
+        await page.goto("https://demo.automationtesting.in/Windows.html");
+
+        const [page1] = await Promise.all([
+            page.waitForEvent("popup"),
+            page.getByRole("button", { name: "click" }).click()
+        ]);
+
+        const [page2] = await Promise.all([
+            page1.waitForEvent("popup"),
+            page1.getByRole("link", { name: "Visit Conference Website for" }).click()
+        ]);
+
+        await page2.getByRole("link", { name: "Videos & Photos", exact: true }).click();
+
+        await context.close();
+    });
+});

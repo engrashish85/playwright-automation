@@ -5,7 +5,7 @@ test.describe('FakeStore API', () => {
     const baseUrl = 'https://fakestoreapi.com';
     const childUrl = '/products/1';
     const apiUrl = `${baseUrl}${childUrl}`;
-
+    
     const response = await request.get(apiUrl);
 
     // Validate status code and content type

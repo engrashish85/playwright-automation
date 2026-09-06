@@ -26,6 +26,7 @@ test.describe('Keyboard and Mouse Operations', () => {
         const slider:Locator = page.locator("//span[text()='Price']/parent::div/parent::div/following-sibling::div").nth(1);
         await slider.highlight();
         const bb = await page.locator("//span[text()='Price']/parent::div/parent::div/following-sibling::div").nth(1).boundingBox();
+        if (!bb) throw new Error('Bounding box not found');
         console.log("x and y are - "+bb?.x +" and "+bb?.y);
         await page.waitForTimeout(10000);
         await page.mouse.move(bb?.x + bb?.width/2, bb?.y + bb?.height/2);
@@ -65,7 +66,7 @@ test.describe('Keyboard and Mouse Operations', () => {
         await dragElement.dragTo(dropElement);
     })
 
-    test.only('Keyboard and Mouse Right click operations', async({page}) => {
+    test('Keyboard and Mouse Right click operations', async({page}) => {
         await page.goto("https://textbox.johnjago.com/")
         await page.locator("textarea").pressSequentially("Hello World", { delay:500});
         await page.locator("textarea").dblclick({button: "left"});
@@ -79,7 +80,6 @@ test.describe('Keyboard and Mouse Operations', () => {
         await page.keyboard.press('ArrowDown');
         await page.waitForTimeout(500);
         await page.keyboard.press('Enter');
-        
         await page.keyboard.type("Hello World");
         await page.keyboard.down('Shift')
         for (let i = 0; i < 'World'.length; i++) {
@@ -88,5 +88,6 @@ test.describe('Keyboard and Mouse Operations', () => {
         await page.keyboard.up('Shift');
         await page.keyboard.press('Backspace');
         await page.waitForTimeout(10000);
+        console.log("a");
     })
 })

@@ -14,10 +14,11 @@ test.describe('Page Object Model Tests', () => {
     // let productsPage: ProductsPage;
     // let cartPage: CartPage;
 
-    test('should add a product to the cart and verify it', { tag: '@pom' }, async ({page, loginPage, productsPage, cartPage}) => {
+    test('should add a product to the cart and verify it', { tag: '@pom' }, async ({page, loginPage, productsPage, cartPage}, testInfo) => {
         // loginPage = new LoginPage(page);
         // productsPage = new ProductsPage(page);
         // cartPage = new CartPage(page);
+        console.log(`tag name is ${testInfo.tags}`);
         const testData = JSON.parse(fs.readFileSync('test-data/data.json', 'utf-8'));
         const productName = testData.productLoginData.productName;
         const productType = testData.productLoginData.productType;
